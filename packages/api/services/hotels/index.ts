@@ -1,9 +1,122 @@
 import { db } from "index"
+import { Hotel } from "./types"
 
-function getHotels() {
-  const collection = db?.collection("hotels")
+function getHotels(query: string) {
+  const collection = db?.collection<Hotel>("hotels")
 
-  return collection?.find().toArray()
+  return collection
+    .aggregate([
+      {
+        $search: {
+          compound: {
+            should: [
+              {
+                autocomplete: {
+                  query,
+                  path: "chain_name",
+                  fuzzy: {
+                    maxEdits: 1,
+                    prefixLength: 1,
+                    maxExpansions: 256,
+                  },
+                },
+              },
+              {
+                autocomplete: {
+                  query,
+                  path: "hotel_name",
+                  fuzzy: {
+                    maxEdits: 1,
+                    prefixLength: 1,
+                    maxExpansions: 256,
+                  },
+                },
+              },
+              {
+                autocomplete: {
+                  query,
+                  path: "addressline1",
+                  fuzzy: {
+                    maxEdits: 1,
+                    prefixLength: 1,
+                    maxExpansions: 256,
+                  },
+                },
+              },
+              {
+                autocomplete: {
+                  query,
+                  path: "addressline2",
+                  fuzzy: {
+                    maxEdits: 1,
+                    prefixLength: 1,
+                    maxExpansions: 256,
+                  },
+                },
+              },
+              {
+                autocomplete: {
+                  query,
+                  path: "zipcode",
+                  fuzzy: {
+                    maxEdits: 1,
+                    prefixLength: 1,
+                    maxExpansions: 256,
+                  },
+                },
+              },
+              {
+                autocomplete: {
+                  query,
+                  path: "city",
+                  fuzzy: {
+                    maxEdits: 1,
+                    prefixLength: 1,
+                    maxExpansions: 256,
+                  },
+                },
+              },
+              {
+                autocomplete: {
+                  query,
+                  path: "state",
+                  fuzzy: {
+                    maxEdits: 1,
+                    prefixLength: 1,
+                    maxExpansions: 256,
+                  },
+                },
+              },
+              {
+                autocomplete: {
+                  query,
+                  path: "country",
+                  fuzzy: {
+                    maxEdits: 1,
+                    prefixLength: 1,
+                    maxExpansions: 256,
+                  },
+                },
+              },
+              {
+                autocomplete: {
+                  query,
+                  path: "countryisocode",
+                  fuzzy: {
+                    maxEdits: 1,
+                    prefixLength: 1,
+                    maxExpansions: 256,
+                  },
+                },
+              },
+            ],
+          },
+        },
+      },
+    ])
+    .toArray()
+
+  // return collection?.find({ $text: { $search: query } }).toArray()
 }
 
 export const hotelsService = {

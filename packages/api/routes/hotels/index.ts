@@ -1,5 +1,4 @@
 import { Router } from "express"
-import { db } from "index"
 import { hotelsService } from "services/hotels"
 
 export const hotelsRouter: Router = Router()
