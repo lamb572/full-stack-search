@@ -7,10 +7,6 @@ import { rootRouter } from "routes"
 
 dotenv.config()
 
-if (process.env.NODE_ENV !== "production" && !process.env.DATABASE_URL) {
-  await import("./db/startAndSeedMemoryDB")
-}
-
 const PORT = process.env.PORT || 3001
 
 const app = express()
