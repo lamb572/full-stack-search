@@ -113,6 +113,18 @@ function getHotels(query: string) {
           },
         },
       },
+      {
+        $addFields: {
+          searchScore: {
+            $meta: "searchScore",
+          },
+        },
+      },
+      {
+        $sort: {
+          searchScore: -1,
+        },
+      },
     ])
     .toArray()
 }

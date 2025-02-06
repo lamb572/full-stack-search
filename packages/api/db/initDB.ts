@@ -13,21 +13,10 @@ const main = async () => {
   const client = new MongoClient(process.env.DATABASE_URL)
 
   try {
-    const index = {
-      name: "default",
-      definition: {
-        /* search index definition fields */
-        mappings: {
-          dynamic: true,
-        },
-      },
-    }
     await client.connect()
     const db = client.db("test")
     await db.collection("cities").insertMany(cities)
-    // await db.collection("cities").createIndex({
-    //   name: "text",
-    // })
+
     await db.collection("cities").createSearchIndex({
       definition: {
         mappings: {
@@ -80,10 +69,6 @@ const main = async () => {
         },
       },
     })
-    // await db.collection("countries").createIndex({
-    //   country: "text",
-    //   countryisocode: "text",
-    // })
 
     await db.collection("hotels").insertMany(hotels)
     await db.collection("hotels").createSearchIndex({
@@ -194,18 +179,6 @@ const main = async () => {
         },
       },
     })
-
-    // await db.collection("hotels").createIndex({
-    //   chain_name: "text",
-    //   hotel_name: "text",
-    //   addressline1: "text",
-    //   addressline2: "text",
-    //   zipcode: "text",
-    //   city: "text",
-    //   state: "text",
-    //   country: "text",
-    //   countryisocode: "text",
-    // })
   } catch (err) {
     console.log(err)
     process.exit(1)
