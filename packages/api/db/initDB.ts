@@ -5,7 +5,6 @@ import { hotels } from "./seeds/hotels"
 import "dotenv/config"
 
 const main = async () => {
-  //   config({ path: "../.env" })
   if (!process.env.DATABASE_URL) {
     console.log("DATABASE_URL is not set")
     process.exit(1)
