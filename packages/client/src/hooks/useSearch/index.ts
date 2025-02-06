@@ -1,5 +1,5 @@
 import { getCodeSandboxHost } from "@codesandbox/utils"
-import useSWRMutation from "swr/mutation"
+import useSWRMutation, { SWRMutationConfiguration } from "swr/mutation"
 import { GetSearchResultsParams, SearchResults } from "./types"
 
 async function getSearchResults(
@@ -18,13 +18,20 @@ async function getSearchResults(
   }).then((res) => res.json())
 }
 
-export function useSearch() {
+export function useSearch(
+  options?: SWRMutationConfiguration<
+    SearchResults,
+    Error,
+    string,
+    GetSearchResultsParams
+  >
+) {
   const { data, error, isMutating, reset, trigger } = useSWRMutation<
     SearchResults,
     Error,
     string,
     GetSearchResultsParams
-  >(`/search`, getSearchResults)
+  >(`/search`, getSearchResults, options)
 
   return {
     searchResults: data,
