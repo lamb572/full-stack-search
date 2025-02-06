@@ -5,8 +5,8 @@ import { hotelsService } from "services/hotels"
 async function getResults(query: string) {
   try {
     const hotels = await hotelsService.getHotels(query)
-    const cities = await countriesService.getCountries(query)
-    const countries = await citiesService.getCities(query)
+    const cities = await citiesService.getCities(query)
+    const countries = await countriesService.getCountries(query)
 
     return {
       hotels,

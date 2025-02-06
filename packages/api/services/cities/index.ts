@@ -1,28 +1,22 @@
 import { db } from "index"
 import { City } from "./types"
 
-function getCities(query: string) {
+async function getCities(query: string) {
   try {
     const collection = db?.collection<City>("cities")
 
-    return collection
+    const results = await collection
       .aggregate([
         {
           $search: {
-            compound: {
-              should: [
-                {
-                  autocomplete: {
-                    query,
-                    path: "name",
-                    fuzzy: {
-                      maxEdits: 1,
-                      prefixLength: 1,
-                      maxExpansions: 256,
-                    },
-                  },
-                },
-              ],
+            autocomplete: {
+              query,
+              path: "name",
+              fuzzy: {
+                maxEdits: 1,
+                prefixLength: 1,
+                maxExpansions: 256,
+              },
             },
           },
         },
@@ -40,6 +34,8 @@ function getCities(query: string) {
         },
       ])
       .toArray()
+
+    return results
   } catch (err) {
     console.error(err)
     if (err instanceof Error) {

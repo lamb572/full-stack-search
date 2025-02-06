@@ -1,11 +1,11 @@
 import { db } from "index"
 import { Country } from "./types"
 
-function getCountries(query: string) {
+async function getCountries(query: string) {
   try {
     const collection = db?.collection<Country>("countries")
 
-    return collection
+    const results = await collection
       .aggregate([
         {
           $search: {
@@ -23,9 +23,9 @@ function getCountries(query: string) {
                   },
                 },
                 {
-                  countryisocode: {
+                  autocomplete: {
                     query,
-                    path: "country",
+                    path: "countryisocode",
                     fuzzy: {
                       maxEdits: 1,
                       prefixLength: 1,
@@ -51,6 +51,8 @@ function getCountries(query: string) {
         },
       ])
       .toArray()
+
+    return results
   } catch (err) {
     console.error(err)
     if (err instanceof Error) {
