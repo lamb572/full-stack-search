@@ -4,7 +4,6 @@ async function getResults(query: string) {
   try {
     const hotels = await hotelsService.getHotels(query)
 
-    console.log("hotels", hotels)
     return {
       hotels,
     }

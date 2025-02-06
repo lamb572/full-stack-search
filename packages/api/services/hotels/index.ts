@@ -115,8 +115,6 @@ function getHotels(query: string) {
       },
     ])
     .toArray()
-
-  // return collection?.find({ $text: { $search: query } }).toArray()
 }
 
 export const hotelsService = {
