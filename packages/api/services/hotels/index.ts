@@ -1,5 +1,6 @@
 import { db } from "index"
 import { Hotel } from "./types"
+import { ObjectId } from "mongodb"
 
 async function getHotels(query: string) {
   try {
@@ -139,6 +140,22 @@ async function getHotels(query: string) {
   }
 }
 
+async function getHotelById(id: string) {
+  try {
+    const collection = db?.collection<Hotel>("hotels")
+
+    const result = await collection.findOne({ _id: new ObjectId(id) })
+    return result
+  } catch (err) {
+    console.error(err)
+    if (err instanceof Error) {
+      throw err
+    }
+    throw new Error("An error occurred getting hotels")
+  }
+}
+
 export const hotelsService = {
   getHotels,
+  getHotelById,
 }

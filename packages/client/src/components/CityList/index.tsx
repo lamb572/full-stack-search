@@ -1,5 +1,5 @@
 import { Link } from "react-router"
-import { City } from "../../hooks/useCities/types"
+import { City } from "../../hooks/useCity/types"
 
 export interface CityListProps {
   cities: City[]
@@ -12,7 +12,7 @@ export function CityList({ cities }: CityListProps) {
     <div>
       {cities.map((city, index) => (
         <li key={index}>
-          <Link to={`/country/${city._id}`} className="dropdown-item">
+          <Link to={`/city/${city._id}`} className="dropdown-item">
             <i className="fa fa-building mr-2"></i>
             {city.name}
           </Link>

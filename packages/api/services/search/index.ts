@@ -1,5 +1,5 @@
 import { citiesService } from "services/cities"
-import { countriesService } from "services/countires"
+import { countriesService } from "services/countries"
 import { hotelsService } from "services/hotels"
 
 async function getResults(query: string) {

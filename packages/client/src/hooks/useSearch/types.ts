@@ -1,6 +1,6 @@
-import { City } from "../useCities/types"
-import { Country } from "../useCountries/types"
-import { Hotel } from "../useHotels"
+import { City } from "../useCity/types"
+import { Country } from "../useCountry/types"
+import { Hotel } from "../useHotel"
 
 export interface SearchResults {
   hotels: Hotel[]

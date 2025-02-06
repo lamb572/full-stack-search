@@ -1,5 +1,6 @@
 import { db } from "index"
 import { Country } from "./types"
+import { ObjectId } from "mongodb"
 
 async function getCountries(query: string) {
   try {
@@ -62,4 +63,19 @@ async function getCountries(query: string) {
   }
 }
 
-export const countriesService = { getCountries }
+async function getCountriesById(id: string) {
+  try {
+    const collection = db?.collection<Country>("countries")
+
+    const result = await collection.findOne({ _id: new ObjectId(id) })
+    return result
+  } catch (err) {
+    console.error(err)
+    if (err instanceof Error) {
+      throw err
+    }
+    throw new Error("An error occurred getting country")
+  }
+}
+
+export const countriesService = { getCountries, getCountriesById }

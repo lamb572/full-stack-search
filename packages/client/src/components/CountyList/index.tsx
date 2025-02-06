@@ -1,5 +1,5 @@
 import { Link } from "react-router"
-import { Country } from "../../hooks/useCountries/types"
+import { Country } from "../../hooks/useCountry/types"
 
 export interface CountyListProps {
   countries: Country[]

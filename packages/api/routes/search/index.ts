@@ -4,7 +4,6 @@ import { searchService } from "services/search"
 export const searchRouter: Router = Router()
 
 searchRouter.get("/", async (req, res) => {
-  console.log("test", req.query)
   const query = req.query as { filter: string }
 
   try {
