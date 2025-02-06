@@ -5,15 +5,15 @@ import { DropMenu } from "../../components/DropMenu"
 
 export default function HomePage() {
   const [showClearBtn, setShowClearBtn] = useState(false)
+  const [searchValue, setSearchValue] = useState<string>("")
 
-  const { isError, isLoading, reset, searchResults, trigger } = useSearch()
+  const { reset, searchResults, trigger } = useSearch()
   const cities = searchResults?.cities || []
   const countries = searchResults?.countries || []
   const hotels = searchResults?.hotels || []
 
-  const isResultsEmpty = !cities.length && !countries.length && !hotels.length
-
   const handleClear = () => {
+    setSearchValue("")
     setShowClearBtn(false)
     reset()
   }
@@ -23,7 +23,7 @@ export default function HomePage() {
       handleClear()
       return
     }
-
+    setSearchValue(event.target.value)
     setShowClearBtn(true)
     trigger({ filter: event.target.value })
   }
@@ -38,8 +38,9 @@ export default function HomePage() {
                 onChange={handleChange}
                 showClearBtn={showClearBtn}
                 onClear={handleClear}
+                value={searchValue}
               />
-              {!isResultsEmpty && (
+              {searchResults && (
                 <DropMenu
                   hotels={hotels}
                   cities={cities}

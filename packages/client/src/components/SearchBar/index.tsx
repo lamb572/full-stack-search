@@ -4,11 +4,13 @@ export interface SearchBarProps {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void
   showClearBtn: boolean
   onClear: () => void
+  value: string | undefined
 }
 export default function SearchBar({
   onChange,
   showClearBtn,
   onClear,
+  value,
 }: SearchBarProps) {
   return (
     <div className="form">
@@ -18,6 +20,7 @@ export default function SearchBar({
         className="form-control form-input"
         placeholder="Search accommodation..."
         onChange={onChange}
+        value={value}
       />
       {showClearBtn && (
         <span className="left-pan">
