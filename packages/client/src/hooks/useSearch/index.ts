@@ -1,14 +1,6 @@
 import { getCodeSandboxHost } from "@codesandbox/utils"
 import useSWRMutation from "swr/mutation"
-import { Hotel } from "../useHotels"
-
-export interface SearchResults {
-  hotels: Hotel[]
-}
-
-export interface GetSearchResultsParams {
-  filter: string
-}
+import { GetSearchResultsParams, SearchResults } from "./types"
 
 async function getSearchResults(
   url: string,
