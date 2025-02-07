@@ -4,6 +4,35 @@
 
 This project has a simple setup with an api, hooked up to MongoDB and a frontend piece initiated with [vite](https://vitejs.dev/).
 
+## Pre-requisites
+
+### Setup MongoDB Atlas Database
+
+Options include
+
+#### MongoDB Atlas
+
+- Create a free account on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
+- Create a new cluster
+- Get the connection string
+- Add the connection string to the .env file
+
+#### MongoDB Atlas Local
+
+[detailed setup instruction](https://www.mongodb.com/docs/atlas/cli/current/atlas-cli-deploy-local/)
+
+- install dependencies
+  ```bash
+  brew install mongodb-atlas-cli
+  ```
+- Install Docker
+- Setup local deployment
+  ```bash
+  atlas deployments setup
+  ```
+- specify start up
+- Add connection sting to .env file
+
 ## Install and run
 
 From the project root:
@@ -80,17 +109,76 @@ When clicking on one of the `Hotels`, `Cities` or `Countries` links, the applica
 
 ### Limitations
 
-Given the time constraints, we do not expect a fully production-ready solution. We're primarily interested in the approach and the overall quality of the solution. 
-Feel free to modify the current codebase as needed, including adding or removing dependencies. 
+Given the time constraints, we do not expect a fully production-ready solution. We're primarily interested in the approach and the overall quality of the solution.
+Feel free to modify the current codebase as needed, including adding or removing dependencies.
 For larger or more time-intensive changes, you're welcome to outline your ideas in the write-up section below and discuss them further during the call.
 
 <img src="./assets/search-example.png" width="400px" />
 
 ### Write-up
 
-<!-- Write-up/conclusion section -->
+#### Overview
 
-_When all the behaviour is implemented, feel free to add some observations or conclusions you like to share in the section_
+##### API
+
+Update the API to use routes, services and implement the DB during start.
+
+Created the Search endpoint that uses [Atlas Search ](https://www.mongodb.com/docs/atlas/atlas-search/)to fuzzy search the required fields in the database. The search is case insensitive and will return results on the `hotels`, `cities`, and `countries` collections.
+
+Create Cities, countries, and hotels endpoints to fetch the specific data by ID.
+
+##### Client
+
+Add react-router to handle the navigation between the search page and the data pages.
+
+Broke components into smaller pieces to make them more manageable, reusable, and aid with react reconciliation.
+
+Implemented [useSWR](https://swr.vercel.app/) to handle the data fetching and caching. This is just a preferred fetching tool for me, as i find a lot of the built in features to be very useful.
+
+##### Project
+
+Added a script to seed the data and add the required index's for Atlas search.
+
+#### Next steps
+
+##### API
+
+Create a mongo service / factory to handle the connection to the database.
+
+- limits duplication
+- enable large scale changes like versioning
+
+Add Request and Response validation to the routes.
+
+- Implement a tool like zod to verify data coming in and out of the API.
+
+Update the API structure to include controllers.
+
+- This will allow for better separation of concerns and make the code more readable.
+- Will be the home of the request and response validation.
+
+Add unit tests to the API.
+
+Refine Atlas search, more data better scores.
+
+##### Client
+
+Create a UI package to prevent duplication and move component testing to a specific package.
+
+Implement Image regression testing on components.
+
+Fix the height issues on the result fields. currently double scroll is required to get to the bottom results.
+
+Implement search saving. allows users to nav back and keep their search results. options:
+
+- Search params
+- Context/caching
+
+##### Project
+
+Implement automated local start up for MongoDB Atlas. enables a quicker start up for other developers.
+
+Add E2E tests to the project. for client side testing i find e2e tests to have more real world value than unit tests on UI components.
 
 ### Database structure
 
