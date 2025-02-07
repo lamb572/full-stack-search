@@ -24,7 +24,11 @@ export default function SearchBar({
       />
       {showClearBtn && (
         <span className="left-pan">
-          <i className="fa fa-close" onClick={onClear}></i>
+          <i
+            className="fa fa-close"
+            onClick={onClear}
+            data-testid="clear-button"
+          ></i>
         </span>
       )}
     </div>
