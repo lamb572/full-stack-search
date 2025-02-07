@@ -81,12 +81,6 @@ $ npm run start
 
 The UI should start at http://localhost:3000
 
-### Database connection & environment variables
-
-By default, the code is set up to start and seed a MongoDB in-memory server, which should be sufficient for the test. The database URL will be logged on startup, and the seed data can be found at ./packages/api/db/seeds.
-
-If this setup does not work for you or if you prefer to use your own MongoDB server, you can create a .env file. In the ./packages/api folder, create a .env file (or rename the existing .env.sample) and fill in the environment variables.
-
 ## Task at hand
 
 When the project is up and running, you should see a search-bar on the screen. This one is currently hooked up to the `/hotels` endpoint.
