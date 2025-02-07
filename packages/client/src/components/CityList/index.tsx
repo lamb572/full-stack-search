@@ -10,8 +10,8 @@ export function CityList({ cities }: CityListProps) {
   }
   return (
     <div>
-      {cities.map((city, index) => (
-        <li key={index}>
+      {cities.map((city) => (
+        <li key={city._id}>
           <Link to={`/city/${city._id}`} className="dropdown-item">
             <i className="fa fa-building mr-2"></i>
             {city.name}

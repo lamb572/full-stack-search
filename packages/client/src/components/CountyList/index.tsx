@@ -10,8 +10,8 @@ export function CountyList({ countries }: CountyListProps) {
   }
   return (
     <div>
-      {countries.map((country, index) => (
-        <li key={index}>
+      {countries.map((country) => (
+        <li key={country._id}>
           <Link to={`/country/${country._id}`} className="dropdown-item">
             <i className="fa fa-building mr-2"></i>
             {country.country}
