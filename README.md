@@ -32,6 +32,10 @@ Options include
   ```
 - specify start up
 - Add connection sting to .env file
+- init the DB, from the api package
+  ```bash
+  npm run init:db
+  ```
 
 ## Install and run
 
