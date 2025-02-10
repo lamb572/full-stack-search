@@ -9,6 +9,9 @@
     "start": "concurrently npm:start:*",
     "start:api": "npm run -w api dev",
     "start:client": "npm run -w client start",
+    "build": "concurrently npm:build:*",
+    "build:api": "npm run -w api build",
+    "build:client": "npm run -w client build",
     "dev": "npm start",
     "test": "npm run -w client test",
     "api-no-watch": "npm run -w api dev:no-watch"
